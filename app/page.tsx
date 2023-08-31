@@ -1,95 +1,38 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import styles from './page.module.scss'
+import Card from '@/components/card/Card'
+
+const array = [
+	{
+		title: 'Lorem ipsum dolor sit amet, consectetur',
+		date: '23 July 2023, 11:07:40AM'
+	},
+	{
+		title: 'Napoli won Seria A',
+		date: '10 July 2010, 09:07:40AM'
+	},
+	{
+		title: 'Argentina won World Champion',
+		date: '23 July 2023, 11:07:40AM'
+	},
+	{
+		title: 'Lorem ipsum dolor sit amet, consectetur',
+		date: '23 July 2023, 12:03:50AM'
+	},
+	{
+		title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+		date: '23 July 2023, 11:07:40AM'
+	}
+]
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+	return (
+		<main className={styles.wrapper}>
+			<h1 className={styles.title}>Guardian News</h1>
+			<section className={styles.cardList}>
+				{array.map(item => (
+					<Card key={item.title} date={item.date} title={item.title} />
+				))}
+			</section>
+		</main>
+	)
 }
