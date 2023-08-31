@@ -24,13 +24,28 @@ const array = [
 	}
 ]
 
-export default function Home() {
+const getNews = async () => {
+	const data = await fetch(
+		'https://content.guardianapis.com/search?api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3'
+	)
+
+	return data.json()
+}
+
+export default async function Home() {
+	const { response } = await getNews()
+	const news = response.results
+
 	return (
 		<main className={styles.wrapper}>
 			<h1 className={styles.title}>Guardian News</h1>
 			<section className={styles.cardList}>
-				{array.map(item => (
-					<Card key={item.title} date={item.date} title={item.title} />
+				{news.map(item => (
+					<Card
+						key={item.id}
+						date={item.webPublicationDate}
+						title={item.webTitle}
+					/>
 				))}
 			</section>
 		</main>
