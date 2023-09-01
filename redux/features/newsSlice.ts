@@ -17,35 +17,27 @@ export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
 	return response.response.results
 })
 
-const initialState = [
-	{
-		webTitle: 'Lorem ipsum 15 won Asss',
-		webPublicationDate: '13/14/15'
-	},
-	{
-		webTitle: 'Napoli won Seria A',
-		webPublicationDate: '13/14/15'
-	}
-]
-
 const newsSlice = createSlice({
 	name: 'news',
 	initialState: {
-		news: initialState,
+		news: [],
 		status: 'resolved'
 	} as State,
 	reducers: {},
-	extraReducers: {
-		[fetchNews.pending]: (state: State) => {
+	extraReducers: builder => {
+		builder.addCase(fetchNews.pending, (state: State) => {
 			state.status = 'loading'
-		},
-		[fetchNews.fulfilled]: (state: State, { payload }: { payload: News }) => {
-			state.news = payload
-			state.status = 'resolved'
-		},
-		[fetchNews.rejected]: (state: State) => {
-			state.status = 'error'
-		}
+		}),
+			builder.addCase(
+				fetchNews.fulfilled,
+				(state: State, { payload }: { payload: News }) => {
+					state.news = payload
+					state.status = 'resolved'
+				}
+			),
+			builder.addCase(fetchNews.rejected, (state: State) => {
+				state.status = 'error'
+			})
 	}
 })
 
