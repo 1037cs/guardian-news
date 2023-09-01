@@ -1,12 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
 import Select from 'react-select'
-import { useDispatch } from 'react-redux'
-import { fetchNews } from '@/services/fetch'
-import { AppDispatch } from '@/redux/store'
 
-type Option = {
+export type Option = {
 	value: SortOptions
 	label: string
 }
@@ -16,25 +12,24 @@ export enum SortOptions {
 	RELEVANCE = 'relevance'
 }
 
-const options: Option[] = [
+export const options: Option[] = [
 	{ value: SortOptions.RELEVANCE, label: 'By relevance' },
 	{ value: SortOptions.NEWEST, label: 'By newest' }
 ]
 
-const SortSelect = () => {
-	const [selectedSort, setSelectedSort] = useState<Option | null>(options[1])
-	const dispatch = useDispatch<AppDispatch>()
-
-	const onChangeHandler = (value: Option | null) => {
-		dispatch(fetchNews({ sort: value?.value }))
-	}
-
+const SortSelect = ({
+	selectedSort,
+	onChange
+}: {
+	selectedSort: Option | null
+	onChange: (_: Option | null) => void
+}) => {
 	return (
 		<Select
 			isMulti={false}
 			options={options}
 			defaultValue={selectedSort}
-			onChange={value => onChangeHandler(value)}
+			onChange={value => onChange(value)}
 			isSearchable={false}
 		/>
 	)

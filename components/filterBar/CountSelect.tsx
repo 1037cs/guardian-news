@@ -1,10 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Select from 'react-select'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '@/redux/store'
-import { fetchNews } from '@/services/fetch'
 
 export type Option = {
 	value: CountOptions
@@ -17,27 +14,25 @@ export enum CountOptions {
 	FIFTY = '50'
 }
 
-const options = [
+export const options = [
 	{ value: CountOptions.TWENTY, label: '20' },
 	{ value: CountOptions.THIRTY, label: '30' },
 	{ value: CountOptions.FIFTY, label: '50' }
 ]
 
-const CountSelect = () => {
-	const [selectedSort, setSelectedSort] = useState<Option | null>(options[0])
-	const dispatch = useDispatch<AppDispatch>()
-
-	const onChangeHandler = (value: Option | null) => {
-		console.log(value)
-		dispatch(fetchNews({ count: value?.value }))
-	}
-
+const CountSelect = ({
+	selectedCount,
+	onChange
+}: {
+	selectedCount: Option | null
+	onChange: (_: Option | null) => void
+}) => {
 	return (
 		<Select
 			isMulti={false}
 			options={options}
-			defaultValue={selectedSort}
-			onChange={value => onChangeHandler(value)}
+			defaultValue={selectedCount}
+			onChange={value => onChange(value)}
 			isSearchable={false}
 		/>
 	)
