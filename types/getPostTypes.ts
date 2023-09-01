@@ -18,7 +18,16 @@ export interface Content {
 	webTitle: string
 	webUrl: string
 	apiUrl: string
+	fields: Fields
 	isHosted: boolean
 	pillarId: string
 	pillarName: string
+}
+
+export interface Fields {
+	standfirst: string
+	byline: string
+	body: string
+	shortUrl: string
+	thumbnail: string
 }

@@ -1,6 +1,6 @@
 'use client'
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { Result, Root } from '@/types/getNewsTypes'
+import { createSlice } from '@reduxjs/toolkit'
+import { Result } from '@/types/getNewsTypes'
 import { fetchNews } from '@/services/fetch'
 
 type State = {

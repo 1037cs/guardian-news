@@ -1,0 +1,43 @@
+.wrapper {
+  width: 1250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 44px;
+}
+
+.by{
+  font-size: 20px;
+  .author{
+    color:#C70000;
+  }
+}
+
+.image{
+  width: 500px;
+  height: auto;
+  float: left;
+  display: inline;
+  margin: 0 20px 20px 0;
+}
+
+.bodyWrapper{
+  font-weight: 200;
+  p:not(:last-child){
+    margin-bottom: 20px;
+  }
+
+  p a{
+    color:#C70000;
+    text-decoration: underline;
+
+    &:hover{
+      color: #7e0000;
+    }
+  }
+}
