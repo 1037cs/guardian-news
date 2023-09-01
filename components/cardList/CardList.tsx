@@ -8,7 +8,7 @@ import { fetchNews } from '@/redux/features/newsSlice'
 import Card from '@/components/card/Card'
 
 const CardList = () => {
-	const news = useSelector((state: RootState) => state.news.news)
+	const { news, error, status } = useSelector((state: RootState) => state.news)
 	const dispatch = useDispatch<AppDispatch>()
 
 	useEffect(() => {
@@ -17,13 +17,13 @@ const CardList = () => {
 
 	return (
 		<section className={styles.cardList}>
-			{news.map(item => (
-				<Card
-					key={item.webTitle}
-					title={item.webTitle}
-					date={item.webPublicationDate}
-				/>
-			))}
+			{status === 'loading' ? (
+				<h1>Loading...</h1>
+			) : error ? (
+				<h1>{error}</h1>
+			) : (
+				news.map(item => <Card key={item.webTitle} item={item} />)
+			)}
 		</section>
 	)
 }

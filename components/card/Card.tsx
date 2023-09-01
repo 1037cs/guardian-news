@@ -2,17 +2,25 @@
 
 import React from 'react'
 import styles from './Card.module.scss'
+import Image from 'next/image'
+import { Result } from '@/redux/features/responseTypes'
+import moment from 'moment'
 
-type CardType = {
-	title: string
-	date: string
-}
-
-const Card = ({ title, date }: CardType) => {
+const Card = ({ item }: { item: Result }) => {
 	return (
 		<div className={styles.card}>
-			<div className={styles.date}>{date}</div>
-			<div className={styles.title}>{title}</div>
+			<Image
+				width={0}
+				height={0}
+				src={item.fields.thumbnail}
+				alt={item.webTitle}
+				sizes='100vw'
+				className={styles.image}
+			/>
+			<div className={styles.date}>
+				{moment(item.webPublicationDate).format('D MMM YYYY, h:mm:ss A')}
+			</div>
+			<div className={styles.title}>{item.webTitle}</div>
 		</div>
 	)
 }
