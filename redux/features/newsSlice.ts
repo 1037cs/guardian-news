@@ -25,7 +25,7 @@ export const fetchNews = createAsyncThunk(
 			const response: Root = await data.json()
 			return response.response.results
 		} catch (e) {
-			return rejectWithValue(e.message)
+			return rejectWithValue(e)
 		}
 	}
 )
@@ -52,7 +52,6 @@ const newsSlice = createSlice({
 			),
 			builder.addCase(fetchNews.rejected, (state: State, { payload }) => {
 				state.status = 'error'
-				state.error = payload
 			})
 	}
 })
