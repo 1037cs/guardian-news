@@ -1,0 +1,80 @@
+.article {
+  font-weight: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  & > p{
+    width: 80%;
+  }
+}
+
+aside{
+  padding-top: 10px;
+  font-size: 15px;
+  border-top: 1px solid #DCDCDC;
+}
+
+ul{
+  list-style-position: inside;
+    p{
+      display: inline;
+    }
+}
+.block {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 40px;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 4px 30px -4px rgba(0, 0, 0, 0.25);
+
+  &-elements{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  div {
+    box-shadow: none;
+  }
+
+  &-title {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  &-time {
+    font-size: 12px;
+    font-weight: 500;
+    color: grey;
+  }
+}
+
+.twitter-tweet {
+  border: 1px solid #DCDCDC;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+blockquote {
+  width: 80%;
+  font-size: 12px;
+  margin: 10px auto;
+
+  p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+}
+
+p {
+  font-size: 20px;
+
+  strong {
+    font-weight: 500;
+  }
+}

@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export default async function getPost(id: string) {
 	const response = await fetch(
-		`https://content.guardianapis.com/${id}?show-fields=body,trailtext,thumbnail,standfirst,byline,shortUrl&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`,
+		`https://content.guardianapis.com/${id}?show-fields=body,trailtext,thumbnail,main,standfirst,byline,shortUrl&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`,
 		{
 			next: {
 				revalidate: 60

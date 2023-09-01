@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  div,h1,h2,h3,h4,h5,h6{
+    cursor: default;
+  }
 }
 
 .title {
@@ -11,33 +14,15 @@
   font-size: 44px;
 }
 
-.by{
+.by {
   font-size: 20px;
-  .author{
-    color:#C70000;
+
+  .author {
+    color: #C70000;
   }
 }
 
-.image{
+.image {
   width: 500px;
   height: auto;
-  float: left;
-  display: inline;
-  margin: 0 20px 20px 0;
-}
-
-.bodyWrapper{
-  font-weight: 200;
-  p:not(:last-child){
-    margin-bottom: 20px;
-  }
-
-  p a{
-    color:#C70000;
-    text-decoration: underline;
-
-    &:hover{
-      color: #7e0000;
-    }
-  }
 }

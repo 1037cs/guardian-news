@@ -30,4 +30,5 @@ export interface Fields {
 	body: string
 	shortUrl: string
 	thumbnail: string
+	main: string
 }

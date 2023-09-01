@@ -1,7 +1,8 @@
 import getPost from '@/services/fetch'
 import styles from '@/app/item/[...id]/item.module.scss'
 import moment from 'moment'
-import Image from 'next/image'
+import PostBody from '@/components/postBody/PostBody'
+import PostMain from '@/components/postMain/PostMain'
 
 type Props = {
 	params: {
@@ -22,20 +23,8 @@ export default async function Post({ params: { id } }: Props) {
 			<div className={styles.by}>
 				by <i className={styles.author}>{post.fields.byline}</i>
 			</div>
-			<div>
-				<Image
-					src={post.fields.thumbnail}
-					alt={post.webTitle}
-					width={0}
-					height={0}
-					sizes='100vw'
-					className={styles.image}
-				/>
-				<article
-					className={styles.bodyWrapper}
-					dangerouslySetInnerHTML={{ __html: post.fields.body }}
-				/>
-			</div>
+			<PostMain post={post} />
+			<PostBody post={post} />
 		</main>
 	)
 }

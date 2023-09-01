@@ -1,0 +1,16 @@
+.mainWrapper{
+    align-self: center;
+    width: 80%;
+}
+
+figcaption{
+    margin-top: 10px;
+    font-size:15px;
+    font-weight: 200;
+    color: grey;
+    text-align: center;
+
+    span{
+        display: block;
+    }
+}
