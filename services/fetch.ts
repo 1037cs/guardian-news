@@ -2,6 +2,7 @@ import { Root } from '@/types/getPostTypes'
 import { Root as newsRoot } from '@/types/getNewsTypes'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { SortOptions } from '@/components/filterBar/SortSelect'
+import { CountOptions } from '@/components/filterBar/CountSelect'
 
 export default async function getPost(id: string) {
 	const response = await fetch(
@@ -17,12 +18,23 @@ export default async function getPost(id: string) {
 	return data
 }
 
+type RequestType = {
+	sort?: SortOptions
+	count?: CountOptions
+}
+
 export const fetchNews = createAsyncThunk(
 	'news/fetchNews',
-	async (option: string = SortOptions.NEWEST, { rejectWithValue }) => {
+	async (payload: RequestType, { rejectWithValue }) => {
 		try {
+			const { sort, count } = payload
+
 			const data = await fetch(
-				`https://content.guardianapis.com/search?order-by=${option}&show-fields=thumbnail,score&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
+				`https://content.guardianapis.com/search?order-by=${
+					sort ?? SortOptions.NEWEST
+				}&page-size=${
+					count ?? CountOptions.TWENTY
+				}&show-fields=thumbnail&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
 			)
 
 			if (!data.ok) {

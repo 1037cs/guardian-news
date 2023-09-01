@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { fetchNews } from '@/services/fetch'
 import { AppDispatch } from '@/redux/store'
 
-export type Option = {
+type Option = {
 	value: SortOptions
 	label: string
 }
@@ -25,8 +25,8 @@ const SortSelect = () => {
 	const [selectedSort, setSelectedSort] = useState<Option | null>(options[1])
 	const dispatch = useDispatch<AppDispatch>()
 
-	const handleAction = (value: Option | null) => {
-		if (value) dispatch(fetchNews(value.value))
+	const onChangeHandler = (value: Option | null) => {
+		dispatch(fetchNews({ sort: value?.value }))
 	}
 
 	return (
@@ -34,7 +34,7 @@ const SortSelect = () => {
 			isMulti={false}
 			options={options}
 			defaultValue={selectedSort}
-			onChange={value => handleAction(value)}
+			onChange={value => onChangeHandler(value)}
 			isSearchable={false}
 		/>
 	)

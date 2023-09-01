@@ -31,5 +31,4 @@ export interface Result {
 
 export interface Fields {
 	thumbnail: string
-	score: string
 }
