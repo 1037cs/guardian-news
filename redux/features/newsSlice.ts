@@ -1,34 +1,13 @@
 'use client'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { Result, Root } from '@/redux/features/responseTypes'
-
-type News = { webTitle: string; webPublicationDate: string }[]
+import { Result, Root } from '@/types/getNewsTypes'
+import { fetchNews } from '@/services/fetch'
 
 type State = {
 	news: Result[]
 	status: 'resolved' | 'error' | 'loading'
 	error: string | null
 }
-
-export const fetchNews = createAsyncThunk(
-	'news/fetchNews',
-	async (_, { rejectWithValue }) => {
-		try {
-			const data = await fetch(
-				'https://content.guardianapis.com/search?show-fields=thumbnail&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3'
-			)
-
-			if (!data.ok) {
-				throw new Error(`${data.status} Server error`)
-			}
-
-			const response: Root = await data.json()
-			return response.response.results
-		} catch (e) {
-			return rejectWithValue(e)
-		}
-	}
-)
 
 const newsSlice = createSlice({
 	name: 'news',
