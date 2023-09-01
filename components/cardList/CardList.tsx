@@ -13,7 +13,7 @@ const CardList = () => {
 	const dispatch = useDispatch<AppDispatch>()
 
 	useEffect(() => {
-		dispatch(fetchNews(SortOptions.NEWEST))
+		dispatch(fetchNews({}))
 	}, [dispatch])
 
 	return (
