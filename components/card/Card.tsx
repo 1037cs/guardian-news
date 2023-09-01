@@ -17,14 +17,16 @@ const Card = ({ item }: { item: Result }) => {
 			}}
 		>
 			<div className={styles.card}>
-				<Image
-					width={0}
-					height={0}
-					src={item.fields.thumbnail}
-					alt={item.webTitle}
-					sizes='100vw'
-					className={styles.image}
-				/>
+				{item.fields?.thumbnail && (
+					<Image
+						width={0}
+						height={0}
+						src={item.fields.thumbnail}
+						alt={item.webTitle}
+						sizes='100vw'
+						className={styles.image}
+					/>
+				)}
 				<div className={styles.date}>
 					{moment(item.webPublicationDate).format('D MMM YYYY, h:mm:ss A')}
 				</div>

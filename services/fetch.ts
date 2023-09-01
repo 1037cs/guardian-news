@@ -1,6 +1,7 @@
 import { Root } from '@/types/getPostTypes'
 import { Root as newsRoot } from '@/types/getNewsTypes'
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { SortOptions } from '@/components/filterBar/SortSelect'
 
 export default async function getPost(id: string) {
 	const response = await fetch(
@@ -18,10 +19,10 @@ export default async function getPost(id: string) {
 
 export const fetchNews = createAsyncThunk(
 	'news/fetchNews',
-	async (_, { rejectWithValue }) => {
+	async (option: string = SortOptions.NEWEST, { rejectWithValue }) => {
 		try {
 			const data = await fetch(
-				'https://content.guardianapis.com/search?show-fields=thumbnail&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3'
+				`https://content.guardianapis.com/search?order-by=${option}&show-fields=thumbnail,score&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
 			)
 
 			if (!data.ok) {

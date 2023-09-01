@@ -5,28 +5,30 @@
   align-items: center;
   gap: 20px;
 
-  & > p{
+  & > p {
     width: 80%;
   }
 }
 
-.gu-image{
+.gu-image {
   width: 100%;
   height: auto;
 }
 
-aside{
+aside {
   padding-top: 10px;
   font-size: 15px;
   border-top: 1px solid #DCDCDC;
 }
 
-ul{
+ul {
   list-style-position: inside;
-    p{
-      display: inline;
-    }
+
+  p {
+    display: inline;
+  }
 }
+
 .block {
   width: 80%;
   display: flex;
@@ -37,7 +39,7 @@ ul{
   background: #fff;
   box-shadow: 0 4px 30px -4px rgba(0, 0, 0, 0.25);
 
-  &-elements{
+  &-elements {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -76,7 +78,21 @@ blockquote {
   }
 }
 
-.element{
+.quoted {
+  p {
+    font-style: italic;
+
+    &::before {
+      content: '“';
+    }
+
+    &::after {
+      content: '”';
+    }
+  }
+}
+
+.element {
   margin: 0 auto;
 }
 
