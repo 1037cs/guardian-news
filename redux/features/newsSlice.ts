@@ -17,21 +17,7 @@ const newsSlice = createSlice({
 		status: 'loading',
 		error: null
 	} as State,
-	reducers: {
-		sortNews: (state: State, { payload }: { payload: string }) => {
-			if (payload === 'relevance') {
-				state.news = state.news.sort((a, b) => {
-					return a.fields.score > b.fields.score ? 1 : -1
-				})
-			} else if (payload === 'date') {
-				state.news = state.news.sort((a, b) => {
-					return moment(a.webPublicationDate).isBefore(b.webPublicationDate)
-						? 1
-						: -1
-				})
-			}
-		}
-	},
+	reducers: {},
 	extraReducers: builder => {
 		builder.addCase(fetchNews.pending, (state: State) => {
 			state.status = 'loading'
@@ -50,5 +36,5 @@ const newsSlice = createSlice({
 	}
 })
 
-export const { sortNews } = newsSlice.actions
+export const {} = newsSlice.actions
 export default newsSlice.reducer
