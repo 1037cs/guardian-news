@@ -12,8 +12,18 @@
 }
 
 .title {
+  color: $text-color;
   font-weight: 800;
   font-size: 44px;
+  text-decoration: underline;
+
+    a:active,
+    a:hover,
+    a {
+      text-decoration: none;
+      color: $text-color;
+    }
+
 }
 
 .by {

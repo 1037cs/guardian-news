@@ -11,12 +11,17 @@ type Props = {
 }
 
 export default async function Post({ params: { id } }: Props) {
+	console.log(id)
 	const { response } = await getPost(id.join('/'))
 	const post = response.content
 
 	return (
 		<main className={styles.wrapper}>
-			<h1 className={styles.title}>{post.webTitle}</h1>
+			<h1 className={styles.title}>
+				<a href={post.webUrl} target='_blank'>
+					{post.webTitle}
+				</a>
+			</h1>
 			<div className={styles.date}>
 				{moment(post.webPublicationDate).format('D MMM YYYY, h:mm:ss A')}
 			</div>
