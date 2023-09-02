@@ -11,3 +11,35 @@
   justify-content: center;
   align-items: center
 }
+
+@media (max-width: 1300px){
+  .cardList{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 1024px){
+  .cardList{
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px){
+  .cardList{
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 420px){
+  .cardList{
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+}

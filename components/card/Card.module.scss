@@ -37,3 +37,17 @@
   font-size: 15px;
   font-weight: 500;
 }
+
+@media (max-width:768px) {
+  .card {
+    gap: 5px;
+  }
+  .date {
+    font-size: 10px;
+    font-weight: 400;
+  }
+
+  .title{
+    font-size: 15px;
+  }
+}

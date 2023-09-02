@@ -9,8 +9,6 @@
 }
 
 .selectWrapper {
-
-
   .selectTitle{
     font-size: 20px;
     font-weight: 500;
@@ -25,6 +23,55 @@
       font-size: 20px;
       display: inline-block;
       width: 100px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .input{
+    width: 200px;
+    font-size: 15px;
+  }
+
+  .selectWrapper{
+    .selectTitle{
+        font-size: 15px;
+    }
+
+    .select {
+      font-size: 15px;
+      width: 150px;
+
+      &Page{
+        font-size: 15px;
+        display: inline-block;
+        width: 100px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .input{
+    width: 100%;
+    font-size: 13px;
+    padding: 5px 2px 5px 10px;
+  }
+
+  .selectWrapper{
+    .selectTitle{
+        font-size: 13px;
+    }
+
+    .select {
+      font-size: 13px;
+      width: 150px;
+
+      &Page{
+        font-size: 13px;
+        display: inline-block;
+        width: 100px;
+      }
     }
   }
 }
