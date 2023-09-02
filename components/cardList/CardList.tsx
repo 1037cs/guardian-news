@@ -1,13 +1,12 @@
 'use client'
 
-import styles from './cardList.module.scss'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
-import Card from '@/components/card/Card'
-import { fetchNews, updateNews } from '@/utils/fetch'
+import { fetchNews } from '@/utils/fetch'
 import { CircleLoader } from 'react-spinners'
-import { setPageNumber, setPageSize } from '@/redux/features/newsSlice'
+import styles from './cardList.module.scss'
+import Card from '@/components/card/Card'
 
 const CardList = () => {
 	const { news, error, status, sort, pageSize, query, pageNumber } =
@@ -18,44 +17,20 @@ const CardList = () => {
 		dispatch(fetchNews({ sort, pageSize, query }))
 	}, [dispatch, sort, query])
 
-	// useEffect(() => {
-	// 	dispatch(updateNews({ sort, pageSize, query, pageNumber, type: 'update' }))
-	// }, [pageSize])
-
-	// const scrollHandler = (e: Event) => {
-	// 	const target = e.target as HTMLElement
-	// 	if (
-	// 		target.documentElement.scrollHeight -
-	// 			(target.documentElement.scrollTop + window.innerHeight) <
-	// 		100
-	// 	) {
-	// 	}
-	// }
-
-	// useEffect(() => {
-	// 	document.addEventListener('scroll', scrollHandler)
-	//
-	// 	return () => document.removeEventListener('scroll', scrollHandler)
-	// }, [])
-
-	return status === 'loading' ? (
-		<div
-			style={{
-				width: '100%',
-				height: '100%',
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center'
-			}}
-		>
-			<CircleLoader color='rgba(148,36,451)' />
+	return (
+		<div className={styles.container}>
+			{status === 'loading' ? (
+				<CircleLoader color='rgba(148,36,451)' />
+			) : news.length === 0 ? (
+				<h2 style={{ display: 'inline' }}>News not found. </h2>
+			) : (
+				<section className={styles.cardList}>
+					{news.map(item => (
+						<Card key={item.webTitle} item={item} />
+					))}
+				</section>
+			)}
 		</div>
-	) : (
-		<section className={styles.cardList}>
-			{news.map(item => (
-				<Card key={item.webTitle} item={item} />
-			))}
-		</section>
 	)
 }
 

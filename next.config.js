@@ -8,6 +8,12 @@ const nextConfig = {
 				hostname: 'media.guim.co.uk',
 				port: '',
 				pathname: '/**'
+			},
+			{
+				protocol: 'http',
+				hostname: 'static.guim.co.uk',
+				port: '',
+				pathname: '/**'
 			}
 		]
 	}
