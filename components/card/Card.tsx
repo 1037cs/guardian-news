@@ -28,7 +28,7 @@ const Card = ({ item }: { item: Result }) => {
 					/>
 				)}
 				<div className={styles.date}>
-					{moment(item.webPublicationDate).format('D MMM YYYY, h:mm:ss A')}
+					{moment(item.webPublicationDate).format('D MMM YYYY, h:mm A')}
 				</div>
 				<p className={styles.title}>{item.webTitle}</p>
 			</div>

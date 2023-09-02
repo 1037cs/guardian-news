@@ -15,7 +15,7 @@ export default async function getPost(id: string) {
 
 type RequestType = {
 	sort: SortOptions
-	count: CountOptions
+	pageSize: CountOptions
 	query: string
 }
 
@@ -23,15 +23,29 @@ export const fetchNews = createAsyncThunk(
 	'news/fetchNews',
 	async (payload: RequestType, { rejectWithValue }) => {
 		try {
-			const { sort, count, query } = payload
+			const { sort, pageSize, query } = payload
 
 			const data = await fetch(
-				`https://content.guardianapis.com/search?q=${query}&query-fields=thumbnail,headline&order-by=${sort}&page-size=${count}&show-fields=thumbnail&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
+				`https://content.guardianapis.com/search?q=${query}&query-fields=thumbnail,headline&order-by=${sort}&page-size=${pageSize}&show-fields=thumbnail&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
 			)
 
-			if (!data.ok) {
-				throw new Error(`${data.status} Server error`)
-			}
+			const response: newsRoot = await data.json()
+			return response.response.results
+		} catch (e) {
+			return rejectWithValue(e)
+		}
+	}
+)
+
+export const updateNews = createAsyncThunk(
+	'news/updateNews',
+	async (payload: RequestType, { rejectWithValue }) => {
+		try {
+			const { sort, pageSize, query } = payload
+
+			const data = await fetch(
+				`https://content.guardianapis.com/search?q=${query}&query-fields=thumbnail,headline&order-by=${sort}&page-size=${pageSize}&show-fields=thumbnail&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
+			)
 
 			const response: newsRoot = await data.json()
 			return response.response.results

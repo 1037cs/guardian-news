@@ -1,7 +1,7 @@
 'use client'
 import { createSlice } from '@reduxjs/toolkit'
 import { Result } from '@/types/getNewsTypes'
-import { fetchNews } from '@/utils/fetch'
+import { fetchNews, updateNews } from '@/utils/fetch'
 import { SortOptions } from '@/components/filterBar/SortSelect'
 import { CountOptions } from '@/components/filterBar/CountSelect'
 
@@ -11,7 +11,8 @@ type State = {
 	error: string | null
 	sort: SortOptions
 	pageSize: CountOptions
-	searchString: string
+	query: string
+	pageNumber: number
 }
 
 const newsSlice = createSlice({
@@ -22,7 +23,8 @@ const newsSlice = createSlice({
 		error: null,
 		sort: SortOptions.NEWEST,
 		pageSize: CountOptions.TWENTY,
-		searchString: ''
+		query: '',
+		pageNumber: 1
 	} as State,
 	reducers: {
 		setSort: (state: State, { payload }: { payload: SortOptions }) => {
@@ -32,7 +34,10 @@ const newsSlice = createSlice({
 			state.pageSize = payload
 		},
 		setSearchString: (state: State, { payload }: { payload: string }) => {
-			state.searchString = payload
+			state.query = payload
+		},
+		setPageNumber: (state: State, { payload }: { payload: number }) => {
+			state.pageNumber = payload
 		}
 	},
 	extraReducers: builder => {
@@ -49,9 +54,19 @@ const newsSlice = createSlice({
 			),
 			builder.addCase(fetchNews.rejected, (state: State, { payload }) => {
 				state.status = 'error'
+			}),
+			builder.addCase(
+				updateNews.fulfilled,
+				(state: State, { payload }: { payload: Result[] }) => {
+					state.news = payload
+				}
+			),
+			builder.addCase(updateNews.rejected, (state: State, { payload }) => {
+				state.status = 'error'
 			})
 	}
 })
 
-export const { setSort, setPageSize, setSearchString } = newsSlice.actions
+export const { setSort, setPageSize, setSearchString, setPageNumber } =
+	newsSlice.actions
 export default newsSlice.reducer
