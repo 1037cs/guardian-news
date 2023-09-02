@@ -14,7 +14,7 @@ type RequestType = {
 //fetch post
 export default async function getPost(id: string) {
 	const response = await fetch(
-		`https://content.guardianapis.com/${id}?show-fields=body,trailtext,thumbnail,main,standfirst,byline,shortUrl&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
+		`https://content.guardianapis.com/${id}?show-fields=body,trailtext,thumbnail,main,standfirst,byline,shortUrl&api-key=9e677397-3b7a-447b-b451-27eca5d1bb18`
 	)
 
 	const data: Root = await response.json()

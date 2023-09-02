@@ -13,6 +13,8 @@ type Props = {
 export default async function Post({ params: { id } }: Props) {
 	console.log(id)
 	const { response } = await getPost(id.join('/'))
+	console.log(response);
+	
 	const post = response.content
 
 	return (
