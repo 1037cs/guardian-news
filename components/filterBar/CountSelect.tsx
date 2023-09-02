@@ -2,6 +2,9 @@
 
 import React from 'react'
 import Select from 'react-select'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@/redux/store'
+import { setPageSize, setSort } from '@/redux/features/newsSlice'
 
 export type Option = {
 	value: CountOptions
@@ -20,19 +23,19 @@ export const options = [
 	{ value: CountOptions.FIFTY, label: '50' }
 ]
 
-const CountSelect = ({
-	selectedCount,
-	onChange
-}: {
-	selectedCount: Option | null
-	onChange: (_: Option | null) => void
-}) => {
+const CountSelect = () => {
+	const dispatch = useDispatch<AppDispatch>()
+
+	const onChangeCountHandler = (value: Option | null) => {
+		if (value) dispatch(setPageSize(value.value))
+	}
+
 	return (
 		<Select
 			isMulti={false}
 			options={options}
-			defaultValue={selectedCount}
-			onChange={value => onChange(value)}
+			defaultValue={options[0]}
+			onChange={value => onChangeCountHandler(value)}
 			isSearchable={false}
 		/>
 	)

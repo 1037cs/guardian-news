@@ -6,15 +6,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
 import Card from '@/components/card/Card'
 import { fetchNews } from '@/services/fetch'
-import { SortOptions } from '@/components/filterBar/SortSelect'
 
 const CardList = () => {
-	const { news, error, status } = useSelector((state: RootState) => state.news)
+	const { news, error, status, sort, pageSize } = useSelector(
+		(state: RootState) => state.news
+	)
 	const dispatch = useDispatch<AppDispatch>()
 
 	useEffect(() => {
-		dispatch(fetchNews({}))
-	}, [dispatch])
+		dispatch(fetchNews({ sort: sort, count: pageSize }))
+	}, [dispatch, sort, pageSize])
 
 	return (
 		<section className={styles.cardList}>

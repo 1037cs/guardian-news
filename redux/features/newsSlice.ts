@@ -2,12 +2,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Result } from '@/types/getNewsTypes'
 import { fetchNews } from '@/services/fetch'
-import moment from 'moment'
+import { SortOptions } from '@/components/filterBar/SortSelect'
+import { CountOptions } from '@/components/filterBar/CountSelect'
 
 type State = {
 	news: Result[]
 	status: 'resolved' | 'error' | 'loading'
 	error: string | null
+	sort: SortOptions
+	pageSize: CountOptions
 }
 
 const newsSlice = createSlice({
@@ -15,9 +18,18 @@ const newsSlice = createSlice({
 	initialState: {
 		news: [],
 		status: 'loading',
-		error: null
+		error: null,
+		sort: SortOptions.NEWEST,
+		pageSize: CountOptions.TWENTY
 	} as State,
-	reducers: {},
+	reducers: {
+		setSort: (state: State, { payload }: { payload: SortOptions }) => {
+			state.sort = payload
+		},
+		setPageSize: (state: State, { payload }: { payload: CountOptions }) => {
+			state.pageSize = payload
+		}
+	},
 	extraReducers: builder => {
 		builder.addCase(fetchNews.pending, (state: State) => {
 			state.status = 'loading'
@@ -36,5 +48,5 @@ const newsSlice = createSlice({
 	}
 })
 
-export const {} = newsSlice.actions
+export const { setSort, setPageSize } = newsSlice.actions
 export default newsSlice.reducer

@@ -1,6 +1,9 @@
 'use client'
 
 import Select from 'react-select'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@/redux/store'
+import { setSort } from '@/redux/features/newsSlice'
 
 export type Option = {
 	value: SortOptions
@@ -13,23 +16,23 @@ export enum SortOptions {
 }
 
 export const options: Option[] = [
-	{ value: SortOptions.RELEVANCE, label: 'By relevance' },
-	{ value: SortOptions.NEWEST, label: 'By newest' }
+	{ value: SortOptions.NEWEST, label: 'By newest' },
+	{ value: SortOptions.RELEVANCE, label: 'By relevance' }
 ]
 
-const SortSelect = ({
-	selectedSort,
-	onChange
-}: {
-	selectedSort: Option | null
-	onChange: (_: Option | null) => void
-}) => {
+const SortSelect = () => {
+	const dispatch = useDispatch<AppDispatch>()
+
+	const onChangeSortHandler = (value: Option | null) => {
+		if (value) dispatch(setSort(value.value))
+	}
+
 	return (
 		<Select
 			isMulti={false}
 			options={options}
-			defaultValue={selectedSort}
-			onChange={value => onChange(value)}
+			defaultValue={options[0]}
+			onChange={value => onChangeSortHandler(value)}
 			isSearchable={false}
 		/>
 	)
