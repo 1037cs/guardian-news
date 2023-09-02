@@ -18,7 +18,7 @@ export default async function Post({ params: { id } }: Props) {
 	return (
 		<main className={styles.wrapper}>
 			<h1 className={styles.title}>
-				<a href={post.webUrl} target='_blank'>
+				<a href={post.webUrl} target='_blank' rel='noreferrer'>
 					{post.webTitle}
 				</a>
 			</h1>
