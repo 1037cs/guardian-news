@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/redux/store'
-import { setSearchString } from '@/redux/features/newsSlice'
+import { setPageNumber, setSearchString } from '@/redux/features/newsSlice'
 
 const SearchInput = () => {
 	const [text, setText] = useState('')
@@ -17,8 +17,8 @@ const SearchInput = () => {
 	}
 
 	useEffect(() => {
+		dispatch(setPageNumber(2))
 		dispatch(setSearchString(debouncedInput.replaceAll(' ', '%20')))
-		console.log(debouncedInput)
 	}, [debouncedInput])
 
 	return (

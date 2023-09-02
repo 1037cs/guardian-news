@@ -1,7 +1,7 @@
 'use client'
 import { createSlice } from '@reduxjs/toolkit'
 import { Result } from '@/types/getNewsTypes'
-import { fetchNews, updateNews } from '@/utils/fetch'
+import { fetchNews, paginationNews, updateNews } from '@/utils/fetch'
 import { SortOptions } from '@/components/filterBar/SortSelect'
 import { CountOptions } from '@/components/filterBar/CountSelect'
 
@@ -24,7 +24,7 @@ const newsSlice = createSlice({
 		sort: SortOptions.NEWEST,
 		pageSize: CountOptions.TWENTY,
 		query: '',
-		pageNumber: 1
+		pageNumber: 2
 	} as State,
 	reducers: {
 		setSort: (state: State, { payload }: { payload: SortOptions }) => {
@@ -44,26 +44,37 @@ const newsSlice = createSlice({
 		builder.addCase(fetchNews.pending, (state: State) => {
 			state.status = 'loading'
 			state.error = null
-		}),
-			builder.addCase(
-				fetchNews.fulfilled,
-				(state: State, { payload }: { payload: Result[] }) => {
-					state.news = payload
-					state.status = 'resolved'
-				}
-			),
-			builder.addCase(fetchNews.rejected, (state: State, { payload }) => {
-				state.status = 'error'
-			}),
-			builder.addCase(
-				updateNews.fulfilled,
-				(state: State, { payload }: { payload: Result[] }) => {
-					state.news = payload
-				}
-			),
-			builder.addCase(updateNews.rejected, (state: State, { payload }) => {
-				state.status = 'error'
-			})
+		})
+		builder.addCase(
+			fetchNews.fulfilled,
+			(state: State, { payload }: { payload: Result[] }) => {
+				state.news = payload
+				state.status = 'resolved'
+			}
+		)
+		builder.addCase(fetchNews.rejected, (state: State, { payload }) => {
+			state.status = 'error'
+		})
+		builder.addCase(
+			updateNews.fulfilled,
+			(state: State, { payload }: { payload: Result[] }) => {
+				state.news = payload
+			}
+		)
+		builder.addCase(updateNews.rejected, (state: State, { payload }) => {
+			state.status = 'error'
+		})
+		builder.addCase(paginationNews.pending, (state: State) => {})
+		builder.addCase(
+			paginationNews.fulfilled,
+			(state: State, { payload }: { payload: Result[] }) => {
+				console.log(state.news + ' ETO PAYLOAD ' + payload)
+				state.news = Array.from(new Set(state.news.concat(payload)))
+			}
+		)
+		builder.addCase(paginationNews.rejected, (state: State, { payload }) => {
+			state.status = 'error'
+		})
 	}
 })
 

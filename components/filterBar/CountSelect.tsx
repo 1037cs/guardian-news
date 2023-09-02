@@ -4,7 +4,7 @@ import React from 'react'
 import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
-import { setPageSize } from '@/redux/features/newsSlice'
+import { setPageNumber, setPageSize } from '@/redux/features/newsSlice'
 import styles from './input.module.scss'
 import { updateNews } from '@/utils/fetch'
 
@@ -26,7 +26,7 @@ export const options = [
 ]
 
 const CountSelect = () => {
-	const { sort, pageSize, query, pageNumber } = useSelector(
+	const { sort, pageSize, query } = useSelector(
 		(state: RootState) => state.news
 	)
 	const dispatch = useDispatch<AppDispatch>()
@@ -34,6 +34,7 @@ const CountSelect = () => {
 	const onChangeCountHandler = (value: Option | null) => {
 		if (value) {
 			dispatch(setPageSize(value.value))
+			dispatch(setPageNumber(2))
 			dispatch(updateNews({ sort, pageSize: value.value, query }))
 		}
 	}

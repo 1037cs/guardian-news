@@ -3,7 +3,7 @@
 import Select from 'react-select'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/redux/store'
-import { setSort } from '@/redux/features/newsSlice'
+import { setPageNumber, setSort } from '@/redux/features/newsSlice'
 import styles from './input.module.scss'
 
 export type Option = {
@@ -25,7 +25,10 @@ const SortSelect = () => {
 	const dispatch = useDispatch<AppDispatch>()
 
 	const onChangeSortHandler = (value: Option | null) => {
-		if (value) dispatch(setSort(value.value))
+		if (value) {
+			dispatch(setPageNumber(2))
+			dispatch(setSort(value.value))
+		}
 	}
 
 	return (
