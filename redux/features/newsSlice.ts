@@ -11,6 +11,7 @@ type State = {
 	error: string | null
 	sort: SortOptions
 	pageSize: CountOptions
+	searchString: string
 }
 
 const newsSlice = createSlice({
@@ -20,7 +21,8 @@ const newsSlice = createSlice({
 		status: 'loading',
 		error: null,
 		sort: SortOptions.NEWEST,
-		pageSize: CountOptions.TWENTY
+		pageSize: CountOptions.TWENTY,
+		searchString: ''
 	} as State,
 	reducers: {
 		setSort: (state: State, { payload }: { payload: SortOptions }) => {
@@ -28,6 +30,9 @@ const newsSlice = createSlice({
 		},
 		setPageSize: (state: State, { payload }: { payload: CountOptions }) => {
 			state.pageSize = payload
+		},
+		setSearchString: (state: State, { payload }: { payload: string }) => {
+			state.searchString = payload
 		}
 	},
 	extraReducers: builder => {
@@ -48,5 +53,5 @@ const newsSlice = createSlice({
 	}
 })
 
-export const { setSort, setPageSize } = newsSlice.actions
+export const { setSort, setPageSize, setSearchString } = newsSlice.actions
 export default newsSlice.reducer
