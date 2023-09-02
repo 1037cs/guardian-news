@@ -1,7 +1,7 @@
 'use client'
 import { createSlice } from '@reduxjs/toolkit'
 import { Result } from '@/types/getNewsTypes'
-import { fetchNews } from '@/services/fetch'
+import { fetchNews } from '@/utils/fetch'
 import { SortOptions } from '@/components/filterBar/SortSelect'
 import { CountOptions } from '@/components/filterBar/CountSelect'
 

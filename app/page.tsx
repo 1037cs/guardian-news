@@ -8,10 +8,14 @@ import SearchInput from '@/components/filterBar/SearchInput'
 const Home = () => {
 	return (
 		<main className={styles.wrapper}>
-			<h1 className={styles.title}>Guardian News</h1>
-			<SearchInput />
-			<SortSelect />
-			<CountSelect />
+			<header className={styles.header}>
+				<h1 className={styles.title}>Guardian News</h1>
+				<SearchInput />
+			</header>
+			<div className={styles.filterBar}>
+				<SortSelect />
+				<CountSelect />
+			</div>
 			<CardList />
 		</main>
 	)

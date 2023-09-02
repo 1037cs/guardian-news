@@ -17,13 +17,14 @@ const SearchInput = () => {
 	}
 
 	useEffect(() => {
-		dispatch(setSearchString(debouncedInput))
+		dispatch(setSearchString(debouncedInput.replaceAll(' ', '%20')))
+		console.log(debouncedInput)
 	}, [debouncedInput])
 
 	return (
 		<input
 			className={styles.input}
-			placeholder='Search...'
+			placeholder='What you looking for?'
 			value={text}
 			onChange={e => handleChange(e.target.value)}
 		/>

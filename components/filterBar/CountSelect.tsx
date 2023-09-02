@@ -4,7 +4,8 @@ import React from 'react'
 import Select from 'react-select'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/redux/store'
-import { setPageSize, setSort } from '@/redux/features/newsSlice'
+import { setPageSize } from '@/redux/features/newsSlice'
+import styles from './input.module.scss'
 
 export type Option = {
 	value: CountOptions
@@ -31,13 +32,17 @@ const CountSelect = () => {
 	}
 
 	return (
-		<Select
-			isMulti={false}
-			options={options}
-			defaultValue={options[0]}
-			onChange={value => onChangeCountHandler(value)}
-			isSearchable={false}
-		/>
+		<div className={styles.selectWrapper}>
+			<span className={styles.selectTitle}>Page size: </span>
+			<Select
+				isMulti={false}
+				options={options}
+				defaultValue={options[0]}
+				onChange={value => onChangeCountHandler(value)}
+				isSearchable={false}
+				className={styles.selectPage}
+			/>
+		</div>
 	)
 }
 

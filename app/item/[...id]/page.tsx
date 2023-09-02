@@ -1,4 +1,4 @@
-import getPost from '@/services/fetch'
+import getPost from '@/utils/fetch'
 import styles from '@/app/item/[...id]/item.module.scss'
 import moment from 'moment'
 import PostBody from '@/components/postBody/PostBody'

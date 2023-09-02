@@ -22,6 +22,7 @@ export interface Content {
 	isHosted: boolean
 	pillarId: string
 	pillarName: string
+	fields: Fields
 }
 
 export interface Blocks {

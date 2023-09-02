@@ -6,12 +6,7 @@ import { CountOptions } from '@/components/filterBar/CountSelect'
 
 export default async function getPost(id: string) {
 	const response = await fetch(
-		`https://content.guardianapis.com/${id}?show-fields=body,trailtext,thumbnail,main,standfirst,byline,shortUrl&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`,
-		{
-			next: {
-				revalidate: 60
-			}
-		}
+		`https://content.guardianapis.com/${id}?show-fields=body,trailtext,thumbnail,main,standfirst,byline,shortUrl&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
 	)
 
 	const data: Root = await response.json()
@@ -21,16 +16,17 @@ export default async function getPost(id: string) {
 type RequestType = {
 	sort: SortOptions
 	count: CountOptions
+	query: string
 }
 
 export const fetchNews = createAsyncThunk(
 	'news/fetchNews',
 	async (payload: RequestType, { rejectWithValue }) => {
 		try {
-			const { sort, count } = payload
+			const { sort, count, query } = payload
 
 			const data = await fetch(
-				`https://content.guardianapis.com/search?order-by=${sort}&page-size=${count}&show-fields=thumbnail&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
+				`https://content.guardianapis.com/search?q=${query}&query-fields=thumbnail,headline&order-by=${sort}&page-size=${count}&show-fields=thumbnail&api-key=ac2cb542-cf61-46e9-be89-7b4dc6ac0db3`
 			)
 
 			if (!data.ok) {

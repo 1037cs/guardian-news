@@ -1,9 +1,12 @@
+@import "utils/colors";
+
 .article {
   font-weight: 200;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding-bottom: 40px;
 
   & > p {
     width: 80%;
@@ -18,7 +21,7 @@
 aside {
   padding-top: 10px;
   font-size: 15px;
-  border-top: 1px solid #DCDCDC;
+  border-top: 1px solid $border-color;
 }
 
 ul {
@@ -36,7 +39,6 @@ ul {
   gap: 10px;
   padding: 20px 40px;
   border-radius: 9px;
-  background: #fff;
   box-shadow: 0 4px 30px -4px rgba(0, 0, 0, 0.25);
 
   &-elements {
@@ -62,7 +64,7 @@ ul {
 }
 
 .twitter-tweet {
-  border: 1px solid #DCDCDC;
+  border: 1px solid $border-color;
   padding: 20px;
   border-radius: 5px;
 }
